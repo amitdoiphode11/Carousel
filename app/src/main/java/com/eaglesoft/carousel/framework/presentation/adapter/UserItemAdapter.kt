@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -47,13 +48,49 @@ class UserItemAdapter(
 
     inner class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(user: User?) {
-            itemView.tv_name.text = user?.username
-            itemView.tv_email.text = user?.email
             itemView.iv_profile.load(user?.picture) {
                 crossfade(true)
                 error(R.drawable.ic_launcher_background)
                 transformations(CircleCropTransformation())
             }
+            setUserDetails(
+                context?.getString(R.string.label_my_name_is), user?.username
+            )
+            itemView.rg_bottom.setOnCheckedChangeListener { group, checkedId ->
+                when (checkedId) {
+                    R.id.rb_name -> {
+                        setUserDetails(
+                            context?.getString(R.string.label_my_name_is), user?.username
+                        )
+                    }
+                    R.id.rb_dob -> {
+                        setUserDetails(
+                            context?.getString(R.string.label_my_dob_is),
+                            user?.dob.toString()
+                        )
+                    }
+                    R.id.rb_location -> {
+                        setUserDetails(
+                            context?.getString(R.string.label_my_address_is), user?.email
+                        )
+                    }
+                    R.id.rb_call -> {
+                        setUserDetails(
+                            context?.getString(R.string.label_my_phone_is), user?.phone
+                        )
+                    }
+                    R.id.rb_password -> {
+                        setUserDetails(
+                            context?.getString(R.string.label_my_password), user?.SSN
+                        )
+                    }
+                }
+            }
+        }
+
+        private fun setUserDetails(title: String?, description: String?) {
+            itemView.tv_title.text = title
+            itemView.tv_description.text = description
         }
     }
 }
