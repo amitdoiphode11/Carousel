@@ -55,7 +55,7 @@ constructor() : EntityMapper<UserNetworkEntity, User> {
         return entities.results.map { mapFromEntity(it.user) }
     }
 
-    fun nameMapToEntity(nameEntity: Name): NameNetworkEntity {
+    private fun nameMapToEntity(nameEntity: Name): NameNetworkEntity {
         return NameNetworkEntity(
             title = nameEntity.title,
             first = nameEntity.first,
@@ -63,7 +63,7 @@ constructor() : EntityMapper<UserNetworkEntity, User> {
         )
     }
 
-    fun locationMapToEntity(locationEntity: Location): LocationNetworkEntity {
+    private fun locationMapToEntity(locationEntity: Location): LocationNetworkEntity {
         return LocationNetworkEntity(
             street = locationEntity.street,
             city = locationEntity.city,
@@ -72,7 +72,7 @@ constructor() : EntityMapper<UserNetworkEntity, User> {
         )
     }
 
-    fun nameMapFromEntity(nameEntity: NameNetworkEntity): Name {
+    private fun nameMapFromEntity(nameEntity: NameNetworkEntity): Name {
         return Name(
             title = nameEntity.title,
             first = nameEntity.first,
@@ -80,7 +80,7 @@ constructor() : EntityMapper<UserNetworkEntity, User> {
         )
     }
 
-    fun locationMapFromEntity(locationEntity: LocationNetworkEntity): Location {
+    private fun locationMapFromEntity(locationEntity: LocationNetworkEntity): Location {
         return Location(
             street = locationEntity.street,
             city = locationEntity.city,

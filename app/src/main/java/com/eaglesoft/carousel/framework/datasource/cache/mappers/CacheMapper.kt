@@ -50,19 +50,19 @@ constructor() : EntityMapper<UserCacheEntity, User> {
         return entities.map { mapFromEntity(it) }
     }
 
-    fun nameMapFromEntity(nameEntity: String): Name {
+    private fun nameMapFromEntity(nameEntity: String): Name {
         return Gson().fromJson(nameEntity, Name::class.java)
     }
 
-    fun locationMapFromEntity(locationEntity: String): Location {
+    private fun locationMapFromEntity(locationEntity: String): Location {
         return Gson().fromJson(locationEntity, Location::class.java)
     }
 
-    fun nameMapToEntity(nameEntity: Name): String {
+    private fun nameMapToEntity(nameEntity: Name): String {
         return Gson().toJson(nameEntity)
     }
 
-    fun locationMapToEntity(locationEntity: Location): String {
+    private fun locationMapToEntity(locationEntity: Location): String {
         return Gson().toJson(locationEntity)
     }
 

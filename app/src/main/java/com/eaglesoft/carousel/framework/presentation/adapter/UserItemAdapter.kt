@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_user_carousel.view.*
 class UserItemAdapter(
     private val context: Context?
 ) : RecyclerView.Adapter<UserItemAdapter.UserViewHolder>() {
-    var userList: MutableList<User>? = null
+    private var userList: MutableList<User>? = null
 
     init {
         userList = arrayListOf()
