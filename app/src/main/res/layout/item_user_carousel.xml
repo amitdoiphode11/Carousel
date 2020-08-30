@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/_16dp"
@@ -13,8 +12,7 @@
         android:layout_marginEnd="@dimen/_16dp"
         android:layout_marginBottom="@dimen/_40dp">
 
-        <ImageView
-            android:id="@+id/imageView4"
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="@dimen/_0dp"
             android:layout_height="@dimen/_0dp"
             android:background="@android:color/holo_blue_light"
@@ -37,7 +35,7 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.8" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iv_profile"
             android:layout_width="@dimen/_150dp"
             android:layout_height="@dimen/_150dp"
@@ -89,33 +87,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8dp"
-                android:button="@drawable/ic_baseline_perm_contact_calendar_24"
-                android:background="@drawable/selector_bottom_options" />
+                android:background="@drawable/selector_bottom_options"
+                android:button="@drawable/ic_baseline_perm_contact_calendar_24" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rb_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8dp"
-                android:button="@drawable/ic_baseline_location_on_24"
-                android:background="@drawable/selector_bottom_options" />
+                android:background="@drawable/selector_bottom_options"
+                android:button="@drawable/ic_baseline_location_on_24" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rb_call"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8dp"
-                android:button="@drawable/ic_baseline_call_24"
-                android:background="@drawable/selector_bottom_options" />
+                android:background="@drawable/selector_bottom_options"
+                android:button="@drawable/ic_baseline_call_24" />
 
             <androidx.appcompat.widget.AppCompatRadioButton
                 android:id="@+id/rb_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8dp"
-                android:button="@drawable/ic_baseline_lock_24"
-                android:background="@drawable/selector_bottom_options" />
+                android:background="@drawable/selector_bottom_options"
+                android:button="@drawable/ic_baseline_lock_24" />
 
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

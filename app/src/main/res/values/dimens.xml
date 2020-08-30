@@ -5,7 +5,5 @@
     <dimen name="_150dp">150dp</dimen>
     <dimen name="_8dp">8dp</dimen>
     <dimen name="_16dp">16dp</dimen>
-    <dimen name="_2dp">2dp</dimen>
-    <dimen name="_24dp">24dp</dimen>
     <dimen name="_48dp">48dp</dimen>
 </resources>
