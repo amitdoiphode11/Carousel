@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Carousel</string>
     <string name="label_my_name_is">My Name is</string>
-    <string name="label_my_dob_is">My date of birth is</string>
+    <string name="label_my_dob_is">My birth date is</string>
     <string name="label_my_address_is">My address is</string>
     <string name="label_my_phone_is">My phone number is</string>
     <string name="label_my_password">My password is</string>

@@ -9,14 +9,16 @@ class UserCacheEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
     var gender: String,
+    val name: String,
+    val location: String,
     var email: String,
     var picture: String,
     var username: String,
-    var registered:Long,
-    var dob:Long,
-    var phone:String,
-    var cell:String,
-    var SSN:String
+    var registered: Long,
+    var dob: Long,
+    var phone: String,
+    var cell: String,
+    var SSN: String
 )
 
 

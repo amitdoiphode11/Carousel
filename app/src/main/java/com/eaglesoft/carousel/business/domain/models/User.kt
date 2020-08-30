@@ -3,6 +3,8 @@ package com.eaglesoft.carousel.business.domain.models
 data class User(
     var id: Int? = null,
     var gender: String,
+    val name: Name,
+    val location: Location,
     var email: String,
     var picture: String,
     var username: String,

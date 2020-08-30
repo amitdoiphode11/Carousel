@@ -57,37 +57,46 @@ class UserItemAdapter(
                 error(R.drawable.ic_launcher_background)
                 transformations(CircleCropTransformation())
             }
-            setUserDetails(
-                context?.getString(R.string.label_my_name_is), user?.username
-            )
+            itemView.rb_name.isSelected = true
+            setSelected(itemView.rb_name.id, user)
+
             itemView.rg_bottom.setOnCheckedChangeListener { group, checkedId ->
-                when (checkedId) {
-                    R.id.rb_name -> {
-                        setUserDetails(
-                            context?.getString(R.string.label_my_name_is), user?.username
-                        )
-                    }
-                    R.id.rb_dob -> {
-                        setUserDetails(
-                            context?.getString(R.string.label_my_dob_is),
-                            user?.dob.toString()
-                        )
-                    }
-                    R.id.rb_location -> {
-                        setUserDetails(
-                            context?.getString(R.string.label_my_address_is), user?.email
-                        )
-                    }
-                    R.id.rb_call -> {
-                        setUserDetails(
-                            context?.getString(R.string.label_my_phone_is), user?.phone
-                        )
-                    }
-                    R.id.rb_password -> {
-                        setUserDetails(
-                            context?.getString(R.string.label_my_password), user?.SSN
-                        )
-                    }
+                setSelected(checkedId, user)
+            }
+        }
+
+        private fun setSelected(
+            checkedId: Int,
+            user: User?
+        ) {
+            when (checkedId) {
+                R.id.rb_name -> {
+                    setUserDetails(
+                        context?.getString(R.string.label_my_name_is),
+                        "${user?.name?.first} ${user?.name?.last}"
+                    )
+                }
+                R.id.rb_dob -> {
+                    setUserDetails(
+                        context?.getString(R.string.label_my_dob_is),
+                        user?.dob.toString()
+                    )
+                }
+                R.id.rb_location -> {
+                    setUserDetails(
+                        context?.getString(R.string.label_my_address_is),
+                        "${user?.location?.zip}, ${user?.location?.street}, ${user?.location?.city}"
+                    )
+                }
+                R.id.rb_call -> {
+                    setUserDetails(
+                        context?.getString(R.string.label_my_phone_is), user?.phone
+                    )
+                }
+                R.id.rb_password -> {
+                    setUserDetails(
+                        context?.getString(R.string.label_my_password), user?.SSN
+                    )
                 }
             }
         }
