@@ -29,7 +29,7 @@ constructor(
     private val someString: String
 ) : Fragment(R.layout.fragment_main) {
 
-    private val TAG: String = "AppDebug"
+    private val TAG = "MainFragment"
 
     private val viewModel: MainViewModel by viewModels()
     private var adapter: UserItemAdapter? = null
