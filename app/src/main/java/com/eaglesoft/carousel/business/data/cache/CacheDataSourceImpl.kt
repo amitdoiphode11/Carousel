@@ -27,4 +27,8 @@ constructor(
     override suspend fun get(): User {
         return cacheMapper.mapFromEntity(userDaoService.get())
     }
+
+    override suspend fun getRandom(): User {
+        return cacheMapper.mapFromEntity(userDaoService.getRandom())
+    }
 }

@@ -10,4 +10,5 @@ interface UserDaoService {
 
     suspend fun get(): UserCacheEntity
 
+    suspend fun getRandom(): UserCacheEntity
 }

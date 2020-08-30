@@ -19,4 +19,8 @@ constructor(
     override suspend fun get(): UserCacheEntity {
         return userDao.get()
     }
+
+    override suspend fun getRandom(): UserCacheEntity {
+        return userDao.getRandom()
+    }
 }

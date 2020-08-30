@@ -5,7 +5,6 @@ import com.eaglesoft.carousel.business.data.cache.CacheDataSource
 import com.eaglesoft.carousel.business.data.network.NetworkDataSource
 import com.eaglesoft.carousel.business.domain.models.User
 import com.eaglesoft.carousel.business.domain.state.DataState
-import com.eaglesoft.carousel.business.domain.util.NetworkUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -21,11 +20,24 @@ constructor(
      * Get users from network
      * Show List<User>
      */
-    suspend fun execute(): Flow<DataState<List<User>>> = flow {
+    suspend fun getOnlineUserList(): Flow<DataState<List<User>>> = flow {
         try {
             emit(DataState.Loading)
             val networkUsers = networkDataSource.get()
             emit(DataState.Success(networkUsers))
+        } catch (e: Exception) {
+            Log.e(TAG, "execute: ", e)
+            emit(DataState.Error(e))
+        }
+    }
+
+    suspend fun getOfflineUser(): Flow<DataState<List<User>>> = flow {
+        try {
+            emit(DataState.Loading)
+            val user = cacheDataSource.getRandom()
+            val userList = arrayListOf<User>()
+            userList.add(user)
+            emit(DataState.Success(userList))
         } catch (e: Exception) {
             Log.e(TAG, "execute: ", e)
             emit(DataState.Error(e))

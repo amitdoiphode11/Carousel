@@ -17,4 +17,8 @@ interface UserDao {
 
     @Query("SELECT * FROM user limit 1")
     suspend fun get(): UserCacheEntity
+
+    @Query("SELECT * FROM user ORDER BY RANDOM() limit 1")
+    suspend fun getRandom(): UserCacheEntity
+
 }

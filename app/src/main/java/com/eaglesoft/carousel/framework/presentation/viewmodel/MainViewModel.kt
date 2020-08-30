@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.eaglesoft.carousel.business.domain.models.User
 import com.eaglesoft.carousel.business.domain.state.DataState
+import com.eaglesoft.carousel.business.domain.util.NetworkHelper
 import com.eaglesoft.carousel.business.interactors.GetUsers
 import com.eaglesoft.carousel.framework.presentation.viewmodel.MainStateEvent.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -15,11 +16,11 @@ import kotlinx.coroutines.launch
 class MainViewModel
 @ViewModelInject
 constructor(
-    private val getUsers: GetUsers
+    private val getUsers: GetUsers,
+    private val networkHelper: NetworkHelper
 ) : ViewModel() {
-
+    private val TAG = "MainViewModel"
     private val _dataState: MutableLiveData<DataState<List<User>>> = MutableLiveData()
-
     val dataState: LiveData<DataState<List<User>>>
         get() = _dataState
 
@@ -32,28 +33,35 @@ constructor(
         viewModelScope.launch {
             when (mainStateEvent) {
                 is GetUsersEvent -> {
-                    getUsers.execute()
-                        .onEach { dataState ->
-                            _dataState.value = dataState
-                        }
-                        .launchIn(viewModelScope)
+                    if (networkHelper.isNetworkConnected()) {
+                        getUsers.getOnlineUserList()
+                            .onEach { dataState ->
+                                _dataState.value = dataState
+                            }
+                            .launchIn(viewModelScope)
+                    } else {
+                        getUsers.getOfflineUser().onEach { state ->
+                            _dataState.value = state
+                        }.launchIn(viewModelScope)
+                    }
                 }
             }
         }
     }
 
     fun addFavorite(mainStateEvent: MainStateEvent, user: User?) {
-        viewModelScope.launch {
-            when (mainStateEvent) {
-                is GetUsersEvent -> {
-                    getUsers.addFavorite(user)
-                        .onEach {
-                            _favorite.value = it
-                        }
-                        .launchIn(viewModelScope)
+        if (networkHelper.isNetworkConnected())
+            viewModelScope.launch {
+                when (mainStateEvent) {
+                    is GetUsersEvent -> {
+                        getUsers.addFavorite(user)
+                            .onEach {
+                                _favorite.value = it
+                            }
+                            .launchIn(viewModelScope)
+                    }
                 }
             }
-        }
     }
 }
 
