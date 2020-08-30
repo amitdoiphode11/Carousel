@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 class UserCacheEntity(
 
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    var id: Int? = null,
     var gender: String,
     val name: String,
     val location: String,

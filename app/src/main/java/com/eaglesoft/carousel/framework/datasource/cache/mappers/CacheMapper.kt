@@ -31,7 +31,7 @@ constructor() : EntityMapper<UserCacheEntity, User> {
 
     override fun mapToEntity(domainModel: User): UserCacheEntity {
         return UserCacheEntity(
-            id = domainModel.id ?: 1,
+            id = domainModel.id,
             name = nameMapToEntity(domainModel.name),
             location = locationMapToEntity(domainModel.location),
             gender = domainModel.gender,

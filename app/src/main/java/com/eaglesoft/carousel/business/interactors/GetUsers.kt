@@ -5,6 +5,7 @@ import com.eaglesoft.carousel.business.data.cache.CacheDataSource
 import com.eaglesoft.carousel.business.data.network.NetworkDataSource
 import com.eaglesoft.carousel.business.domain.models.User
 import com.eaglesoft.carousel.business.domain.state.DataState
+import com.eaglesoft.carousel.business.domain.util.NetworkUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -18,7 +19,6 @@ constructor(
     /**
      * Show loading
      * Get users from network
-     * Insert users into cache
      * Show List<User>
      */
     suspend fun execute(): Flow<DataState<List<User>>> = flow {
@@ -32,12 +32,17 @@ constructor(
         }
     }
 
+    /**
+     * Show loading
+     * insert into cache
+     * show user inserted
+     */
     suspend fun addFavorite(user: User?): Flow<DataState<User>> = flow {
         try {
             emit(DataState.Loading)
             user?.let { cacheDataSource.insert(it) }
             emit(DataState.Success(cacheDataSource.get()))
-        }catch (e:Exception){
+        } catch (e: Exception) {
             Log.e(TAG, "addFavorite: ", e)
             emit(DataState.Error(e))
         }
