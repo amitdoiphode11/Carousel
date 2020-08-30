@@ -1,4 +1,4 @@
-package com.eaglesoft.carousel.framework.presentation
+package com.eaglesoft.carousel.framework.presentation.fragment
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory

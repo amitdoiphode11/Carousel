@@ -1,12 +1,11 @@
-package com.eaglesoft.carousel.framework.presentation
+package com.eaglesoft.carousel.framework.presentation.viewmodel
 
-import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
 import com.eaglesoft.carousel.business.domain.models.User
 import com.eaglesoft.carousel.business.domain.state.DataState
 import com.eaglesoft.carousel.business.interactors.GetUsers
-import com.eaglesoft.carousel.framework.presentation.MainStateEvent.*
+import com.eaglesoft.carousel.framework.presentation.viewmodel.MainStateEvent.*
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -16,21 +15,20 @@ import kotlinx.coroutines.launch
 class MainViewModel
 @ViewModelInject
 constructor(
-    private val getUsers: GetUsers,
-    @Assisted private val savedStateHandle: SavedStateHandle
-): ViewModel() {
+    private val getUsers: GetUsers
+) : ViewModel() {
 
     private val _dataState: MutableLiveData<DataState<List<User>>> = MutableLiveData()
 
     val dataState: LiveData<DataState<List<User>>>
         get() = _dataState
 
-    fun setStateEvent(mainStateEvent: MainStateEvent){
+    fun setStateEvent(mainStateEvent: MainStateEvent) {
         viewModelScope.launch {
-            when(mainStateEvent){
+            when (mainStateEvent) {
                 is GetUsersEvent -> {
                     getUsers.execute()
-                        .onEach {dataState ->
+                        .onEach { dataState ->
                             _dataState.value = dataState
                         }
                         .launchIn(viewModelScope)
@@ -42,11 +40,11 @@ constructor(
 }
 
 
-sealed class MainStateEvent{
+sealed class MainStateEvent {
 
-    object GetUsersEvent: MainStateEvent()
+    object GetUsersEvent : MainStateEvent()
 
-    object None: MainStateEvent()
+    object None : MainStateEvent()
 }
 
 
