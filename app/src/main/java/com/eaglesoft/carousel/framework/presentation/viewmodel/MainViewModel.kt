@@ -23,6 +23,11 @@ constructor(
     val dataState: LiveData<DataState<List<User>>>
         get() = _dataState
 
+    private val _favorite: MutableLiveData<DataState<User>> = MutableLiveData()
+    val favorite: LiveData<DataState<User>>
+        get() = _favorite
+
+
     fun setStateEvent(mainStateEvent: MainStateEvent) {
         viewModelScope.launch {
             when (mainStateEvent) {
@@ -37,6 +42,19 @@ constructor(
         }
     }
 
+    fun addFavorite(mainStateEvent: MainStateEvent, user: User?) {
+        viewModelScope.launch {
+            when (mainStateEvent) {
+                is GetUsersEvent -> {
+                    getUsers.addFavorite(user)
+                        .onEach {
+                            _favorite.value = it
+                        }
+                        .launchIn(viewModelScope)
+                }
+            }
+        }
+    }
 }
 
 

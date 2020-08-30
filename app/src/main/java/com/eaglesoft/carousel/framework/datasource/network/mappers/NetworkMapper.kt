@@ -46,9 +46,8 @@ constructor() : EntityMapper<UserNetworkEntity, User> {
         return entities.map { mapFromEntity(it) }
     }
 
-    fun mapFromResultEntityList(entities: UserBaseNetworkEntity?): List<User>? {
-        Log.e(TAG, "mapFromResultEntityList: " + entities.toString())
-        return entities?.results?.map { mapFromEntity(it.user) }
+    fun mapFromResultEntityList(entities: UserBaseNetworkEntity): List<User> {
+        return entities.results?.map { mapFromEntity(it.user) }
     }
 
     companion object {

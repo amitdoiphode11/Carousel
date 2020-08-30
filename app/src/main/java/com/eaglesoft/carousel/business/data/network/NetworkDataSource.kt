@@ -4,5 +4,5 @@ import com.eaglesoft.carousel.business.domain.models.User
 
 interface NetworkDataSource {
 
-    suspend fun get(): List<User>?
+    suspend fun get(): List<User>
 }

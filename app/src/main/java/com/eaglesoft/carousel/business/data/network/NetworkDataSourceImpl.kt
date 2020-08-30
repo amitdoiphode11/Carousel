@@ -10,7 +10,7 @@ constructor(
     private val networkMapper: NetworkMapper
 ) : NetworkDataSource {
     private val TAG = "NetworkDataSourceImpl"
-    override suspend fun get(): List<User>? {
+    override suspend fun get(): List<User> {
         return networkMapper.mapFromResultEntityList(apiRetrofitService.get())
     }
 }

@@ -10,8 +10,8 @@ constructor(
 ) : ApiRetrofitService {
     private val TAG = "ApiRetrofitServiceImpl"
 
-    override suspend fun get(): UserBaseNetworkEntity? {
-        Log.e(TAG, "get: " + apiRetrofit.get()?.results)
+    override suspend fun get(): UserBaseNetworkEntity {
+        Log.e(TAG, "get: " + apiRetrofit.get().results)
         return apiRetrofit.get()
     }
 }

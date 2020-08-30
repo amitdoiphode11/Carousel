@@ -3,10 +3,9 @@ package com.eaglesoft.carousel.framework.presentation.fragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.eaglesoft.carousel.R
 import com.eaglesoft.carousel.business.domain.models.User
@@ -43,7 +42,7 @@ constructor(
     }
 
     private fun subscribeObservers() {
-        viewModel.dataState.observe(viewLifecycleOwner, Observer { dataState ->
+        viewModel.dataState.observe(viewLifecycleOwner, { dataState ->
             when (dataState) {
                 is DataState.Success<List<User>> -> {
                     displayProgressBar(false)
@@ -58,6 +57,24 @@ constructor(
                 }
             }
         })
+
+        viewModel.favorite.observe(viewLifecycleOwner, { favorite ->
+            when (favorite) {
+                is DataState.Success<User> -> {
+                    Toast.makeText(
+                        context,
+                        getString(R.string.message_success_favorite, favorite.data.username),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                is DataState.Error -> {
+
+                }
+                is DataState.Loading -> {
+
+                }
+            }
+        })
     }
 
     private fun displayError(message: String?) {
@@ -65,13 +82,6 @@ constructor(
     }
 
     private fun setUserItem(users: MutableList<User>) {
-        Log.e(TAG, "setUserItem: $users")
-        val user = User(
-            1, "Male", "a@g.com", "http://api.randomuser.me/portraits/men/74.jpg",
-            "amit", 1003992709, 16105005, "(604)-108-8372", "(921)-211-9871",
-            "606-57-7503"
-        )
-        users.add(user)
         adapter?.setData(users)
     }
 
@@ -80,6 +90,7 @@ constructor(
             object : SwipeableTouchHelperCallback(object : OnItemSwiped {
                 override fun onItemSwiped() {
                     adapter?.removeTopItem()
+                    viewModel.setStateEvent(GetUsersEvent)
                 }
 
                 override fun onItemSwipedLeft() {
@@ -87,6 +98,7 @@ constructor(
                 }
 
                 override fun onItemSwipedRight() {
+                    viewModel.addFavorite(GetUsersEvent, adapter?.getFavoriteItem())
                     Log.e("SWIPE", "RIGHT")
                 }
 

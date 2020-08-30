@@ -8,20 +8,23 @@ class CacheDataSourceImpl
 constructor(
     private val userDaoService: UserDaoService,
     private val cacheMapper: CacheMapper
-): CacheDataSource{
+) : CacheDataSource {
 
     override suspend fun insert(user: User): Long {
         return userDaoService.insert(cacheMapper.mapToEntity(user))
     }
 
-    override suspend fun insertList(users: List<User>){
-        for(blog in users) {
+    override suspend fun insertList(users: List<User>) {
+        for (blog in users) {
             userDaoService.insert(cacheMapper.mapToEntity(blog))
         }
     }
 
-    override suspend fun get(): List<User> {
-        return cacheMapper.mapFromEntityList(userDaoService.get())
+    override suspend fun getList(): List<User> {
+        return cacheMapper.mapFromEntityList(userDaoService.getList())
     }
 
+    override suspend fun get(): User {
+        return cacheMapper.mapFromEntity(userDaoService.get())
+    }
 }

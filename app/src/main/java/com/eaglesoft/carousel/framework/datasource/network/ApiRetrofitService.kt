@@ -4,5 +4,5 @@ import com.eaglesoft.carousel.framework.datasource.network.model.UserBaseNetwork
 
 interface ApiRetrofitService {
 
-    suspend fun get(): UserBaseNetworkEntity?
+    suspend fun get(): UserBaseNetworkEntity
 }

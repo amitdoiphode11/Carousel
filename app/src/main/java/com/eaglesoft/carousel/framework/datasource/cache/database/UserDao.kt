@@ -13,5 +13,8 @@ interface UserDao {
     suspend fun insert(userEntity: UserCacheEntity): Long
 
     @Query("SELECT * FROM user")
-    suspend fun get(): List<UserCacheEntity>
+    suspend fun getList(): List<UserCacheEntity>
+
+    @Query("SELECT * FROM user limit 1")
+    suspend fun get(): UserCacheEntity
 }

@@ -32,6 +32,10 @@ class UserItemAdapter(
         notifyDataSetChanged()
     }
 
+    fun getFavoriteItem(): User? {
+        return userList?.get(0)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
             LayoutInflater.from(context).inflate(R.layout.item_user_carousel, parent, false)
