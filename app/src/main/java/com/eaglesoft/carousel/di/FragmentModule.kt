@@ -1,7 +1,7 @@
 package com.eaglesoft.carousel.di
 
 import androidx.fragment.app.FragmentFactory
-import com.eaglesoft.carousel.framework.presentation.MainFragmentFactory
+import com.eaglesoft.carousel.framework.presentation.fragment.MainFragmentFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

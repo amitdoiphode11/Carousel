@@ -8,5 +8,9 @@ interface CacheDataSource {
 
     suspend fun insertList(users: List<User>)
 
-    suspend fun get(): List<User>
+    suspend fun getList(): List<User>
+
+    suspend fun get(): User
+
+    suspend fun getRandom(): User
 }

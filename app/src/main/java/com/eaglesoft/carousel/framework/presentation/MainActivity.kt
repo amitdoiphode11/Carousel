@@ -3,6 +3,8 @@ package com.eaglesoft.carousel.framework.presentation
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.eaglesoft.carousel.R
+import com.eaglesoft.carousel.framework.presentation.fragment.MainFragment
+import com.eaglesoft.carousel.framework.presentation.fragment.MainFragmentFactory
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import javax.inject.Inject

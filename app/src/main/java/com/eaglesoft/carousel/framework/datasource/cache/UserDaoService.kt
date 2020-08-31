@@ -6,6 +6,9 @@ interface UserDaoService {
 
     suspend fun insert(userEntity: UserCacheEntity): Long
 
-    suspend fun get(): List<UserCacheEntity>
+    suspend fun getList(): List<UserCacheEntity>
 
+    suspend fun get(): UserCacheEntity
+
+    suspend fun getRandom(): UserCacheEntity
 }

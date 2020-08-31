@@ -7,5 +7,5 @@ import retrofit2.http.Query
 interface ApiRetrofit {
 
     @GET("api/0.4")
-    suspend fun get(@Query("randomapi") randomapi: String? = null): UserBaseNetworkEntity?
+    suspend fun get(@Query("randomapi") randomapi: String? = null): UserBaseNetworkEntity
 }

@@ -1,8 +1,11 @@
 package com.eaglesoft.carousel.framework.datasource.cache.mappers
 
+import com.eaglesoft.carousel.business.domain.models.Location
+import com.eaglesoft.carousel.business.domain.models.Name
 import com.eaglesoft.carousel.business.domain.models.User
 import com.eaglesoft.carousel.business.domain.util.EntityMapper
 import com.eaglesoft.carousel.framework.datasource.cache.model.UserCacheEntity
+import com.google.gson.Gson
 import javax.inject.Inject
 
 class CacheMapper
@@ -13,6 +16,8 @@ constructor() : EntityMapper<UserCacheEntity, User> {
         return User(
             id = entity.id,
             gender = entity.gender,
+            name = nameMapFromEntity(entity.name),
+            location = locationMapFromEntity(entity.location),
             email = entity.email,
             picture = entity.picture,
             username = entity.username,
@@ -26,7 +31,9 @@ constructor() : EntityMapper<UserCacheEntity, User> {
 
     override fun mapToEntity(domainModel: User): UserCacheEntity {
         return UserCacheEntity(
-            id = domainModel.id ?: 1,
+            id = domainModel.id,
+            name = nameMapToEntity(domainModel.name),
+            location = locationMapToEntity(domainModel.location),
             gender = domainModel.gender,
             email = domainModel.email,
             picture = domainModel.picture,
@@ -42,6 +49,23 @@ constructor() : EntityMapper<UserCacheEntity, User> {
     fun mapFromEntityList(entities: List<UserCacheEntity>): List<User> {
         return entities.map { mapFromEntity(it) }
     }
+
+    private fun nameMapFromEntity(nameEntity: String): Name {
+        return Gson().fromJson(nameEntity, Name::class.java)
+    }
+
+    private fun locationMapFromEntity(locationEntity: String): Location {
+        return Gson().fromJson(locationEntity, Location::class.java)
+    }
+
+    private fun nameMapToEntity(nameEntity: Name): String {
+        return Gson().toJson(nameEntity)
+    }
+
+    private fun locationMapToEntity(locationEntity: Location): String {
+        return Gson().toJson(locationEntity)
+    }
+
 }
 
 

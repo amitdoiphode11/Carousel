@@ -13,8 +13,8 @@ object ProductionModule {
 
     @Singleton
     @Provides
-    fun provideString(): String{
-        return "This is a PRODUCTION string I'm providing for injection"
+    fun provideString(): String {
+        return "PROD String"
     }
 }
 
